@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+<!-- ================= Sidebar ================= -->
+
+<div class="sidebar">
+
+<div class="sidebar-logo">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+<h2>Student Portal</h2>
+
+</div>
+
+<ul>
+
+<li class="active">
+
+<i class="fa-solid fa-house"></i>
+
+Dashboard
+
+</li>
+
+<li>
+
+<i class="fa-solid fa-user-graduate"></i>
+
+Students
+
+</li>
+
+<li>
+
+<i class="fa-solid fa-chart-line"></i>
+
+Performance
+
+</li>
+
+<li>
+
+<i class="fa-solid fa-file-lines"></i>
+
+Reports
+
+</li>
+
+<li>
+
+<i class="fa-solid fa-envelope"></i>
+
+Messages
+
+</li>
+
+<li>
+
+<i class="fa-solid fa-gear"></i>
+
+Settings
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- ================= Main ================= -->
+
+<div class="main-content">
+
+<header class="topbar">
+
+<h1>
+
+Dashboard
+
+</h1>
+
+<div class="profile">
+
+<img src="images/student.png">
+
+<div>
+
+<h3>Admin</h3>
+
+<p>Welcome Back 👋</p>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="dashboard-cards">
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<h2>520</h2>
+
+<p>Total Students</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-book-open"></i>
+
+<h2>24</h2>
+
+<p>Courses</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<h2>3.54</h2>
+
+<p>Average GPA</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<h2>92%</h2>
+
+<p>Attendance</p>
+
+</div>
+
+</section>
+
+<section class="students">
+
+<h2>
+
+Recent Student Records
+
+</h2>
+
+<input type="text" id="searchInput" placeholder="🔍 Search by ID or Name">
+
+<br><br>
+
+<table id="studentTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Department</th>
+
+<th>Semester</th>
+
+<th>GPA</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>101</td>
+
+<td>Ali Khan</td>
+
+<td>BSCS</td>
+
+<td>4</td>
+
+<td>3.82</td>
+
+<td>Excellent</td>
+
+<td>
+
+<button class="delete-btn">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>102</td>
+
+<td>Ayesha Noor</td>
+
+<td>BSIT</td>
+
+<td>3</td>
+
+<td>3.56</td>
+
+<td>Good</td>
+
+<td>
+
+<button class="delete-btn">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>103</td>
+
+<td>Hamza Ali</td>
+
+<td>BSSE</td>
+
+<td>5</td>
+
+<td>3.91</td>
+
+<td>Excellent</td>
+
+<td>
+
+<button class="delete-btn">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>104</td>
+
+<td>Fatima Ahmed</td>
+
+<td>BSAI</td>
+
+<td>2</td>
+
+<td>3.74</td>
+
+<td>Very Good</td>
+
+<td>
+
+<button class="delete-btn">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>105</td>
+
+<td>Usman Tariq</td>
+
+<td>BSCS</td>
+
+<td>6</td>
+
+<td>3.96</td>
+
+<td>Outstanding</td>
+
+<td>
+
+<button class="delete-btn">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+
+<section class="performance-section">
+
+<div class="progress-card">
+
+<h2>Performance Summary</h2>
+
+<p>Programming</p>
+
+<div class="progress">
+
+<div class="progress-bar programming">
+
+95%
+
+</div>
+
+</div>
+
+<p>Database</p>
+
+<div class="progress">
+
+<div class="progress-bar database">
+
+90%
+
+</div>
+
+</div>
+
+<p>Web Development</p>
+
+<div class="progress">
+
+<div class="progress-bar web">
+
+97%
+
+</div>
+
+</div>
+
+<p>Software Engineering</p>
+
+<div class="progress">
+
+<div class="progress-bar se">
+
+88%
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="activity-card">
+
+<h2>Recent Activities</h2>
+
+<ul>
+
+<li>✅ Assignment Submitted</li>
+
+<li>📈 GPA Increased</li>
+
+<li>📚 New Course Added</li>
+
+<li>📝 Quiz Completed</li>
+
+<li>🎯 Attendance Updated</li>
+
+<li>🏆 Performance Improved</li>
+
+</ul>
+
+</div>
+
+</section>
+
+<section class="students">
+
+<h2>Add New Student</h2>
+
+<form id="studentForm">
+
+<input
+type="text"
+id="studentID"
+placeholder="Student ID"
+required>
+
+<input
+type="text"
+id="studentName"
+placeholder="Student Name"
+required>
+
+<input
+type="text"
+id="department"
+placeholder="Department"
+required>
+
+<input
+type="number"
+id="semester"
+placeholder="Semester"
+required>
+
+<input
+type="text"
+id="gpa"
+placeholder="GPA"
+required>
+
+<input
+type="text"
+id="status"
+placeholder="Status"
+required>
+
+<button
+type="submit"
+class="btn">
+
+Add Student
+
+</button>
+
+</form>
+
+</section>
+
+<section class="quick-actions">
+
+<h2>Quick Actions</h2>
+
+<div class="action-container">
+
+<div class="action-card">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<h3>Add Student</h3>
+
+</div>
+
+<div class="action-card">
+
+<i class="fa-solid fa-file-circle-plus"></i>
+
+<h3>Generate Report</h3>
+
+</div>
+
+<div class="action-card">
+
+<i class="fa-solid fa-chart-pie"></i>
+
+<h3>View Analytics</h3>
+
+</div>
+
+<div class="action-card">
+
+<i class="fa-solid fa-envelope"></i>
+
+<h3>Send Notice</h3>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
