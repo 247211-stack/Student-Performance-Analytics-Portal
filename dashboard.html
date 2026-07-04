@@ -44,45 +44,38 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 Dashboard
 
-</li>
-
 <li>
-
+<a href="#">
 <i class="fa-solid fa-user-graduate"></i>
-
 Students
-
+</a>
 </li>
 
-<li>
 
-<i class="fa-solid fa-chart-line"></i>
-
-Performance
-
-</li>
 
 <li>
-
+<a href="report.html">
 <i class="fa-solid fa-file-lines"></i>
-
 Reports
-
+</a>
 </li>
 
 <li>
-
-<i class="fa-solid fa-envelope"></i>
-
-Messages
-
-</li>
-
-<li>
-
+<a href="contact.html">
 <i class="fa-solid fa-gear"></i>
-
 Settings
+</a>
+</li>
+
+<li>
+
+<a href="#" onclick="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
 
 </li>
 
@@ -124,7 +117,7 @@ Dashboard
 
 <i class="fa-solid fa-user-graduate"></i>
 
-<h2>520</h2>
+<h2 id="totalStudents">520</h2>
 
 <p>Total Students</p>
 
@@ -134,7 +127,7 @@ Dashboard
 
 <i class="fa-solid fa-book-open"></i>
 
-<h2>24</h2>
+<h2 id="totalCourses">24</h2>
 
 <p>Courses</p>
 
@@ -144,7 +137,7 @@ Dashboard
 
 <i class="fa-solid fa-chart-line"></i>
 
-<h2>3.54</h2>
+<h2 id="averageGPA">3.54</h2>
 
 <p>Average GPA</p>
 
@@ -154,7 +147,7 @@ Dashboard
 
 <i class="fa-solid fa-calendar-check"></i>
 
-<h2>92%</h2>
+<h2 id="attendance">92%</h2>
 
 <p>Attendance</p>
 
@@ -517,6 +510,17 @@ Add Student
 </div>
 
 </div>
+<script>
+
+if(localStorage.getItem("loggedIn") !== "true"){
+
+    alert("Please login first.");
+
+    window.location.href = "login.html";
+
+}
+
+</script>
 
 <script src="js/script.js"></script>
 

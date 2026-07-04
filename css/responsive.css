@@ -318,3 +318,33 @@ font-size:36px;
 }
 
 }
+/* =========================
+      LOGIN RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+
+.login-box{
+    width:90%;
+    padding:25px;
+}
+
+.input-box input{
+    font-size:14px;
+}
+
+}
+
+/* =========================
+      SIDEBAR LINKS
+========================= */
+
+.sidebar ul li a{
+    color:#fff;
+    text-decoration:none;
+    display:block;
+}
+
+.sidebar ul li a:hover{
+    color:#fff;
+}
