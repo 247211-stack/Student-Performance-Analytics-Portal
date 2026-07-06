@@ -1,288 +1,480 @@
-// Active Navigation
+/* =====================================
+   STUDENT PERFORMANCE ANALYTICS PORTAL
+   WEEK 3
+===================================== */
+
+/* ==========================
+   ACTIVE NAVIGATION
+========================== */
+
 const links = document.querySelectorAll(".nav-links a");
 
 links.forEach(link => {
 
-link.addEventListener("click",function(){
+    link.addEventListener("click", function () {
 
-links.forEach(item=>item.classList.remove("active"));
+        links.forEach(item => item.classList.remove("active"));
 
-this.classList.add("active");
+        this.classList.add("active");
+
+    });
 
 });
 
-});
 
+/* ==========================
+   PAGE LOADED
+========================== */
 
-// Simple Welcome
+window.onload = function () {
 
-window.onload=function(){
-
-console.log("Student Performance Analytics Portal Loaded Successfully");
+    console.log("Student Performance Analytics Portal Loaded Successfully");
 
 };
 
+
+/* ==========================
+   CONTACT FORM
+========================== */
+
 const contactForm = document.getElementById("contactForm");
 
-if(contactForm){
+if (contactForm) {
 
-contactForm.addEventListener("submit",function(e){
+    contactForm.addEventListener("submit", function (e) {
 
-e.preventDefault();
+        e.preventDefault();
 
-const name=document.getElementById("name").value.trim();
-const email=document.getElementById("email").value.trim();
-const message=document.getElementById("message").value.trim();
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
 
-if(name==="" || email==="" || message===""){
+        if (name === "" || email === "" || message === "") {
 
-alert("Please fill all required fields.");
+            alert("Please fill all required fields.");
 
-return;
+            return;
+
+        }
+
+        alert("Message Sent Successfully!");
+
+        contactForm.reset();
+
+    });
 
 }
 
-alert("Message sent successfully!");
 
-contactForm.reset();
-
-});
-
-}
 /* ==========================
-   ADD • SEARCH • DELETE
+   STUDENT DATA
+========================== */
+
+let students = [];
+
+if (localStorage.getItem("students")) {
+
+    students = JSON.parse(localStorage.getItem("students"));
+
+} else {
+
+    students = [
+
+        {
+            id: "101",
+            name: "Ali Khan",
+            department: "BSCS",
+            semester: "4",
+            gpa: "3.82",
+            status: "Excellent"
+        },
+
+        {
+            id: "102",
+            name: "Ayesha Noor",
+            department: "BSIT",
+            semester: "3",
+            gpa: "3.56",
+            status: "Good"
+        },
+
+        {
+            id: "103",
+            name: "Hamza Ali",
+            department: "BSSE",
+            semester: "5",
+            gpa: "3.91",
+            status: "Excellent"
+        },
+
+        {
+            id: "104",
+            name: "Fatima Ahmed",
+            department: "BSAI",
+            semester: "2",
+            gpa: "3.74",
+            status: "Very Good"
+        },
+
+        {
+            id: "105",
+            name: "Usman Tariq",
+            department: "BSCS",
+            semester: "6",
+            gpa: "3.96",
+            status: "Outstanding"
+        }
+
+    ];
+
+    localStorage.setItem("students", JSON.stringify(students));
+
+}
+
+
+/* ==========================
+   DASHBOARD ELEMENTS
 ========================== */
 
 const studentForm = document.getElementById("studentForm");
+
 const studentTable = document.querySelector("#studentTable tbody");
+
 const searchInput = document.getElementById("searchInput");
 
-if(studentForm){
+const totalStudents = document.getElementById("totalStudents");
 
-studentForm.addEventListener("submit",function(e){
+const totalCourses = document.getElementById("totalCourses");
 
-e.preventDefault();
+const averageGPA = document.getElementById("averageGPA");
 
-const id=document.getElementById("studentID").value;
-const name=document.getElementById("studentName").value;
-const department=document.getElementById("department").value;
-const semester=document.getElementById("semester").value;
-const gpa=document.getElementById("gpa").value;
-const status=document.getElementById("status").value;
+const attendance = document.getElementById("attendance");
 
-const row=studentTable.insertRow();
+/* ==========================
+   SHOW STUDENTS
+========================== */
 
-row.innerHTML=`
-<td>${id}</td>
-<td>${name}</td>
-<td>${department}</td>
-<td>${semester}</td>
-<td>${gpa}</td>
-<td>${status}</td>
-<td><button class="delete-btn">Delete</button></td>
-`;
+function displayStudents() {
 
-studentForm.reset();
+    if (!studentTable) return;
 
-updateDeleteButtons();
-updateStudentCount();
+    studentTable.innerHTML = "";
 
-});
+    students.forEach(student => {
 
-}
+        studentTable.innerHTML += `
 
-/* SEARCH */
+        <tr>
 
-if(searchInput){
+            <td>${student.id}</td>
 
-searchInput.addEventListener("keyup",function(){
+            <td>${student.name}</td>
 
-const filter=this.value.toLowerCase();
+            <td>${student.department}</td>
 
-const rows=studentTable.getElementsByTagName("tr");
+            <td>${student.semester}</td>
 
-for(let i=0;i<rows.length;i++){
+            <td>${student.gpa}</td>
 
-const text=rows[i].textContent.toLowerCase();
+            <td>${student.status}</td>
 
-rows[i].style.display=text.includes(filter)?"":"none";
+            <td>
 
-}
+                <button
+                    class="delete-btn"
+                    onclick="deleteStudent('${student.id}')">
 
-});
+                    Delete
 
-}
+                </button>
 
-/* DELETE */
+            </td>
 
-function updateDeleteButtons(){
+        </tr>
 
-const buttons=document.querySelectorAll(".delete-btn");
+        `;
 
-buttons.forEach(button=>{
+    });
 
-button.onclick=function(){
-
-this.parentElement.parentElement.remove();
-
-updateStudentCount();
+    updateDashboardCards();
 
 }
 
-});
+
+/* ==========================
+   ADD STUDENT
+========================== */
+
+if (studentForm) {
+
+    studentForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        const student = {
+
+            id: document.getElementById("studentID").value.trim(),
+
+            name: document.getElementById("studentName").value.trim(),
+
+            department: document.getElementById("department").value.trim(),
+
+            semester: document.getElementById("semester").value.trim(),
+
+            gpa: document.getElementById("gpa").value.trim(),
+
+            status: document.getElementById("status").value.trim()
+
+        };
+
+        students.push(student);
+
+        localStorage.setItem("students", JSON.stringify(students));
+
+        displayStudents();
+
+        studentForm.reset();
+
+    });
 
 }
 
-updateDeleteButtons();
 
-/* TOTAL STUDENTS CARD */
+/* ==========================
+   DELETE STUDENT
+========================== */
 
-function updateStudentCount(){
+function deleteStudent(id) {
 
-function updateStudentCount(){
+    students = students.filter(student => student.id !== id);
 
-    if(!studentTable) return;
+    localStorage.setItem("students", JSON.stringify(students));
 
-    const total = studentTable.rows.length;
-
-    const totalCard = document.querySelector(".dashboard-card h2");
-
-    if(totalCard){
-        totalCard.innerText = total;
-    }
+    displayStudents();
 
 }
-
-const totalCard=document.querySelector(".dashboard-card h2");
-
-if(totalCard){
-
-totalCard.innerText=total;
-
-}
-
-}
-
-updateStudentCount();
 
 
 /* ==========================
    DASHBOARD CARDS
 ========================== */
 
-const totalStudents = document.getElementById("totalStudents");
-const totalCourses = document.getElementById("totalCourses");
-const averageGPA = document.getElementById("averageGPA");
-const attendance = document.getElementById("attendance");
+function updateDashboardCards() {
 
-if (
-    totalStudents &&
-    totalCourses &&
-    averageGPA &&
-    attendance &&
-    studentTable
-) {
-    totalStudents.innerHTML = studentTable.rows.length;
+    if (!totalStudents) return;
+
+    totalStudents.innerHTML = students.length;
+
     totalCourses.innerHTML = "24";
-    averageGPA.innerHTML = "3.54";
+
     attendance.innerHTML = "92%";
+
+    let total = 0;
+
+    students.forEach(student => {
+
+        total += parseFloat(student.gpa);
+
+    });
+
+    averageGPA.innerHTML = (total / students.length).toFixed(2);
+
 }
-/* =====================================
-   REGISTER FUNCTION
-===================================== */
 
-const registerForm = document.getElementById("registerForm");
 
-if (registerForm) {
+/* ==========================
+   INITIAL LOAD
+========================== */
 
-    registerForm.addEventListener("submit", function (e) {
+displayStudents();
+/* ==========================
+   ADVANCED SEARCH
+========================== */
 
-        e.preventDefault();
+if (searchInput) {
 
-        const name = document.getElementById("regName").value.trim();
-        const email = document.getElementById("regEmail").value.trim();
-        const password = document.getElementById("regPassword").value.trim();
-        const confirm = document.getElementById("confirmPassword").value.trim();
+    searchInput.addEventListener("keyup", function () {
 
-        if (name === "" || email === "" || password === "" || confirm === "") {
-            alert("Please fill all fields.");
-            return;
-        }
+        const value = this.value.toLowerCase();
 
-        if (password !== confirm) {
-            alert("Passwords do not match.");
-            return;
-        }
+        const rows = studentTable.querySelectorAll("tr");
 
-        const user = {
-            name: name,
-            email: email,
-            password: password
-        };
+        rows.forEach(row => {
 
-        localStorage.setItem("studentUser", JSON.stringify(user));
+            if (row.innerText.toLowerCase().includes(value)) {
 
-        alert("Registration Successful!");
+                row.style.display = "";
 
-        window.location.href = "login.html";
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
 
     });
 
 }
 
 
-/* =====================================
-   LOGIN FUNCTION
-===================================== */
+/* ==========================
+   SORT BY NAME
+========================== */
 
-const loginForm = document.getElementById("loginForm");
+const sortName = document.getElementById("sortName");
 
-if (loginForm) {
+if (sortName) {
 
-    loginForm.addEventListener("submit", function (e) {
+    sortName.addEventListener("click", function () {
 
-        e.preventDefault();
+        students.sort(function (a, b) {
 
-        const email = document.getElementById("loginEmail").value.trim();
-        const password = document.getElementById("loginPassword").value.trim();
+            return a.name.localeCompare(b.name);
 
-        const user = JSON.parse(localStorage.getItem("studentUser"));
+        });
 
-        if (!user) {
+        localStorage.setItem("students", JSON.stringify(students));
 
-            alert("Please register first.");
+        displayStudents();
 
-            return;
+    });
 
-        }
+}
 
-        if (email === user.email && password === user.password) {
 
-            localStorage.setItem("loggedIn", "true");
+/* ==========================
+   SORT BY GPA
+========================== */
 
-            alert("Login Successful!");
+const sortGPA = document.getElementById("sortGPA");
 
-            window.location.href = "dashboard.html";
+if (sortGPA) {
 
-        } else {
+    sortGPA.addEventListener("click", function () {
 
-            alert("Invalid Email or Password.");
+        students.sort(function (a, b) {
+
+            return parseFloat(b.gpa) - parseFloat(a.gpa);
+
+        });
+
+        localStorage.setItem("students", JSON.stringify(students));
+
+        displayStudents();
+
+    });
+
+}
+
+
+/* ==========================
+   RESET STUDENT DATA
+========================== */
+
+const resetData = document.getElementById("resetData");
+
+if (resetData) {
+
+    resetData.addEventListener("click", function () {
+
+        if (confirm("Are you sure you want to reset all student data?")) {
+
+            localStorage.removeItem("students");
+
+            location.reload();
 
         }
 
     });
 
 }
+/* =====================================
+   WELCOME LOGGED IN USER
+===================================== */
+
+const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (loggedUser) {
+
+    const welcomeUser = document.getElementById("welcomeUser");
+
+    if (welcomeUser) {
+
+        welcomeUser.textContent = loggedUser.name;
+
+    }
+
+}
+
+
+/* =====================================
+   STUDENT PROFILE
+===================================== */
+
+if (loggedUser) {
+
+    const profileName = document.getElementById("profileName");
+
+    const profileEmail = document.getElementById("profileEmail");
+
+    if (profileName) {
+
+        profileName.textContent = loggedUser.name;
+
+    }
+
+    if (profileEmail) {
+
+        profileEmail.textContent = loggedUser.email;
+
+    }
+
+}
+
+
 /* =====================================
    LOGOUT
 ===================================== */
 
-function logout(){
+function logout() {
 
-    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("loggedInUser");
 
     alert("Logged Out Successfully.");
 
     window.location.href = "login.html";
 
 }
+
+
+/* =====================================
+   SIMPLE ANIMATION
+===================================== */
+
+const cards = document.querySelectorAll(
+    ".dashboard-card, .action-card, .progress-card, .activity-card"
+);
+
+cards.forEach(function (card) {
+
+    card.addEventListener("mouseenter", function () {
+
+        card.style.transform = "translateY(-8px)";
+
+    });
+
+    card.addEventListener("mouseleave", function () {
+
+        card.style.transform = "translateY(0px)";
+
+    });
+
+});
+
+
+/* =====================================
+   END OF SCRIPT
+===================================== */
+
+console.log("Week 3 Script Loaded Successfully");

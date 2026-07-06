@@ -940,3 +940,203 @@ grid-column:span 1;
     border:none;
     cursor:pointer;
 }
+/* =====================================
+   WEEK 3 CSS
+===================================== */
+
+/* Subtitle */
+
+.subtitle{
+
+    text-align:center;
+    color:#666;
+    margin-bottom:20px;
+    font-size:14px;
+
+}
+
+/* Success & Error Messages */
+
+.message{
+
+    text-align:center;
+    margin-top:15px;
+    font-weight:600;
+    color:#16a34a;
+
+}
+
+/* Password Box */
+
+.password-box{
+
+    position:relative;
+
+}
+
+.password-box input{
+
+    width:100%;
+    padding-right:45px;
+
+}
+
+.toggle-password{
+
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:18px;
+    user-select:none;
+
+}
+
+/* Student Profile */
+
+.student-profile{
+
+    margin:30px 0;
+
+}
+
+.profile-card{
+
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.profile-card h2{
+
+    color:#2563eb;
+    margin-bottom:20px;
+
+}
+
+.profile-card p{
+
+    margin:10px 0;
+    color:#444;
+
+}
+
+/* Sort Buttons */
+
+.sort-buttons{
+
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+
+}
+
+.sort-buttons .btn{
+
+    border:none;
+    cursor:pointer;
+
+}
+
+/* Login Links */
+
+.login-box a{
+
+    color:#2563eb;
+    font-weight:600;
+
+}
+
+.login-box a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* Smooth Hover */
+
+.dashboard-card,
+.action-card,
+.feature-card,
+.stat-card,
+.profile-card{
+
+    transition:.3s;
+
+}
+
+.dashboard-card:hover,
+.action-card:hover,
+.feature-card:hover,
+.stat-card:hover,
+.profile-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .sort-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .sort-buttons .btn{
+
+        width:100%;
+
+    }
+
+    .profile-card{
+
+        padding:20px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .login-box{
+
+        width:95%;
+        padding:25px;
+
+    }
+
+    .profile img{
+
+        width:45px;
+        height:45px;
+
+    }
+
+
+}
+/* ===========================
+   SORT BUTTONS
+=========================== */
+
+.sort-buttons{
+
+display:flex;
+gap:15px;
+margin-bottom:20px;
+flex-wrap:wrap;
+
+}
+
+.sort-buttons .btn{
+
+border:none;
+cursor:pointer;
+
+}

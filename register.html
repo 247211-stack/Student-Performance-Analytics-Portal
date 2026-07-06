@@ -23,6 +23,10 @@
 
 <h2>Create Account</h2>
 
+<p class="subtitle">
+Create your student account
+</p>
+
 <form id="registerForm">
 
 <div class="input-box">
@@ -53,11 +57,21 @@ required>
 
 <label>Password</label>
 
+<div class="password-box">
+
 <input
 type="password"
 id="regPassword"
 placeholder="Enter Password"
 required>
+
+<span
+class="toggle-password"
+onclick="togglePassword('regPassword',this)">
+👁
+</span>
+
+</div>
 
 </div>
 
@@ -65,11 +79,21 @@ required>
 
 <label>Confirm Password</label>
 
+<div class="password-box">
+
 <input
 type="password"
 id="confirmPassword"
 placeholder="Confirm Password"
 required>
+
+<span
+class="toggle-password"
+onclick="togglePassword('confirmPassword',this)">
+👁
+</span>
+
+</div>
 
 </div>
 
@@ -80,6 +104,11 @@ class="btn">
 Register
 
 </button>
+
+<p
+id="registerMessage"
+class="message">
+</p>
 
 </form>
 
@@ -101,7 +130,7 @@ Login
 
 </section>
 
-<script src="js/script.js"></script>
+<script src="js/auth.js"></script>
 
 </body>
 
