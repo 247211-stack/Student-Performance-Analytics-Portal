@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profile</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+<div class="main-content">
+
+<h1>Profile Management</h1>
+
+<form id="profileForm">
+
+<div class="input-box">
+
+<label>Full Name</label>
+
+<input type="text" id="profileNameInput">
+
+</div>
+
+<div class="input-box">
+
+<label>Email</label>
+
+<input type="email" id="profileEmailInput">
+
+</div>
+
+<div class="input-box">
+
+<label>Role</label>
+
+<input type="text" id="profileRoleInput" readonly>
+
+</div>
+
+<div class="input-box">
+
+<label>Phone</label>
+
+<input type="text" id="profilePhone">
+
+</div>
+
+<div class="input-box">
+
+<label>Address</label>
+
+<textarea id="profileAddress"></textarea>
+
+</div>
+
+<br>
+
+<button class="btn" type="submit">
+
+Save Changes
+
+</button>
+
+</form>
+
+<br>
+
+<a href="dashboard.html" class="btn">
+
+Back to Dashboard
+
+</a>
+
+</div>
+
+</div>
+
+<script src="js/profile.js"></script>
+<script>
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+</script>
+</body>
+
+</html>

@@ -145,7 +145,11 @@ Send Message
 </div>
 
 <script src="js/script.js"></script>
-
+<script>
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+</script>
 </body>
 
 </html>

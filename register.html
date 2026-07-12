@@ -15,6 +15,7 @@
 
 </head>
 
+
 <body>
 
 <section class="login-section">
@@ -96,6 +97,22 @@ onclick="togglePassword('confirmPassword',this)">
 </div>
 
 </div>
+<div class="form-group">
+    <label for="role">Select Role</label>
+
+    <select id="role" required>
+
+        <option value="">Choose Role</option>
+
+        <option value="Administrator">Administrator</option>
+
+        <option value="Teacher">Teacher</option>
+
+        <option value="Student">Student</option>
+
+    </select>
+
+</div>
 
 <button
 type="submit"
@@ -131,7 +148,11 @@ Login
 </section>
 
 <script src="js/auth.js"></script>
-
+<script>
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+</script>
 </body>
 
 </html>

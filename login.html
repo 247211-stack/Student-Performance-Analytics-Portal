@@ -15,6 +15,7 @@
 
 </head>
 
+
 <body>
 
 <section class="login-section">
@@ -114,6 +115,11 @@ Register
 </section>
 
 <script src="js/auth.js"></script>
+<script>
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+</script>
 
 </body>
 

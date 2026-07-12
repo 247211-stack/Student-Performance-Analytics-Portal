@@ -20,6 +20,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 </head>
 
+
 <body>
 
 <div class="dashboard-container">
@@ -36,48 +37,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 </div>
 
-<ul>
-
-<li class="active">
-
-<i class="fa-solid fa-house"></i>
-
-Dashboard
-
-<li>
-<a href="#">
-<i class="fa-solid fa-user-graduate"></i>
-Students
-</a>
-</li>
-
-
-
-<li>
-<a href="report.html">
-<i class="fa-solid fa-file-lines"></i>
-Reports
-</a>
-</li>
-
-<li>
-<a href="contact.html">
-<i class="fa-solid fa-gear"></i>
-Settings
-</a>
-</li>
-
-<li>
-
-<a href="#" onclick="logout()">
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
-Logout
-
-</a>
-
-</li>
+<ul id="sidebarMenu">
 
 </ul>
 
@@ -88,14 +48,49 @@ Logout
 <div class="main-content">
 
 <header class="topbar">
-
+<button id="menuToggle" class="menu-btn">
+    ☰
+</button>
 <h1>
 
 Dashboard
 
 </h1>
+<div class="date-time">
 
-<div class="profile">
+    <h3 id="liveTime"></h3>
+
+    <p id="liveDate"></p>
+
+</div>
+<button id="themeToggle" class="btn">
+    🌙 Dark Mode
+</button>
+<div class="notification">
+
+<i class="fa-solid fa-bell" id="bellIcon"></i>
+
+<span class="badge">3</span>
+
+<div class="notification-box" id="notificationBox">
+
+<h3>Notifications</h3>
+
+<ul>
+
+<li>📚 New Assignment Uploaded</li>
+
+<li>📢 New Notice Added</li>
+
+<li>📝 Quiz Tomorrow</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="profile" id="profileMenu">
 
 <img src="images/student.png" alt="Student">
 
@@ -104,6 +99,37 @@ Dashboard
 <h3 id="welcomeUser">Student</h3>
 
 <p>Welcome Back 👋</p>
+<p id="userRole"></p>
+
+</div>
+
+<i class="fa-solid fa-chevron-down"></i>
+
+<div class="profile-dropdown" id="profileDropdown">
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+My Profile
+
+</a>
+
+<a href="contact.html">
+
+<i class="fa-solid fa-gear"></i>
+
+Settings
+
+</a>
+
+<a href="#" onclick="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
 
 </div>
 
@@ -183,7 +209,8 @@ Recent Student Records
 <input
 type="text"
 id="searchInput"
-placeholder="🔍 Search by ID or Name">
+placeholder="🔍 Search by ID or Name"
+aria-label="Search Students">
 
 <br><br>
 
@@ -378,7 +405,13 @@ Delete
 </table>
 
 </section>
+<section class="chart-section">
 
+<h2>Student Performance Overview</h2>
+
+<canvas id="performanceChart"></canvas>
+
+</section>
 
 <section class="performance-section">
 
@@ -471,36 +504,42 @@ Delete
 type="text"
 id="studentID"
 placeholder="Student ID"
+aria-label="Search Students">
 required>
 
 <input
 type="text"
 id="studentName"
 placeholder="Student Name"
+aria-label="Search Students">
 required>
 
 <input
 type="text"
 id="department"
 placeholder="Department"
+aria-label="Search Students">
 required>
 
 <input
 type="number"
 id="semester"
 placeholder="Semester"
+aria-label="Search Students">
 required>
 
 <input
 type="text"
 id="gpa"
 placeholder="GPA"
+aria-label="Search Students">
 required>
 
 <input
 type="text"
 id="status"
 placeholder="Status"
+aria-label="Search Students">
 required>
 
 <button
@@ -561,10 +600,16 @@ Add Student
 
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/auth.js"></script>
+
 <script src="js/script.js"></script>
 
+<script>
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+</script>
 </body>
 
 </html>

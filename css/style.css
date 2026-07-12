@@ -534,6 +534,8 @@ footer p{
     justify-content:space-between;
     align-items:center;
     margin-bottom:35px;
+    background:#111827;
+    color:white;
 }
 
 .profile{
@@ -580,6 +582,10 @@ footer p{
 .dashboard-card h2{
     margin-bottom:10px;
     color:#0f172a;
+}
+body.dark-mode .dashboard-card h2,
+body.dark-mode .dashboard-card p{
+    color:white;
 }
 
 /* Performance */
@@ -1023,6 +1029,15 @@ grid-column:span 1;
     color:#444;
 
 }
+body.dark-mode .profile-card p,
+body.dark-mode .profile-card strong,
+body.dark-mode .profile-card span{
+    color:#ffffff;
+}
+
+body.dark-mode .profile-card h2{
+    color:#60a5fa;
+}
 
 /* Sort Buttons */
 
@@ -1139,4 +1154,449 @@ flex-wrap:wrap;
 border:none;
 cursor:pointer;
 
+}
+
+
+.dark-mode .dashboard-card,
+.dark-mode .profile-card,
+.dark-mode .students,
+.dark-mode .progress-card,
+.dark-mode .activity-card,
+.dark-mode .action-card{
+    background:#2c2c2c;
+    color:white;
+}
+
+.dark-mode table{
+    color:white;
+}
+
+.dark-mode input,
+.dark-mode textarea{
+    background:#444;
+    color:white;
+    border:1px solid #666;
+}
+/* ==========================
+   GLOBAL DARK MODE
+========================== */
+
+body.dark-mode{
+    background:#121212;
+    color:#f5f5f5;
+}
+
+/* Navbar / Header */
+body.dark-mode .topbar{
+    background:#1e1e1e;
+    color:#fff;
+}
+
+/* Sidebar */
+body.dark-mode .sidebar{
+    background:#1f2937;
+}
+
+body.dark-mode .sidebar a,
+body.dark-mode .sidebar i,
+body.dark-mode .sidebar h2{
+    color:#fff;
+}
+
+/* Cards */
+body.dark-mode .dashboard-card,
+body.dark-mode .profile-card,
+body.dark-mode .students,
+body.dark-mode .progress-card,
+body.dark-mode .activity-card,
+body.dark-mode .action-card{
+    background:#1e1e1e;
+    color:#fff;
+    border:1px solid #333;
+}
+
+/* Forms */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select{
+    background:#2a2a2a;
+    color:#fff;
+    border:1px solid #555;
+}
+
+/* Buttons */
+body.dark-mode .btn{
+    background:#2563eb;
+    color:#fff;
+}
+
+/* Tables */
+body.dark-mode table{
+    background:#1e1e1e;
+    color:#fff;
+}
+
+body.dark-mode th{
+    background:#2563eb;
+    color:#fff;
+}
+
+body.dark-mode td{
+    border-color:#444;
+}
+
+/* Links */
+body.dark-mode a{
+    color:#60a5fa;
+}
+
+/* ==========================
+NOTIFICATION PANEL
+========================== */
+
+.notification{
+
+position:relative;
+
+margin-right:20px;
+
+cursor:pointer;
+
+}
+
+.notification i{
+
+font-size:24px;
+
+}
+
+.badge{
+
+position:absolute;
+
+top:-8px;
+
+right:-8px;
+
+background:red;
+
+color:white;
+
+width:18px;
+
+height:18px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:12px;
+
+}
+
+.notification-box{
+
+opacity:0;
+visibility:hidden;
+transform:translateY(-10px);
+transition:0.3s;
+
+position:absolute;
+right:0;
+top:35px;
+
+width:280px;
+
+background:white;
+
+padding:15px;
+
+border-radius:10px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+
+z-index:1000;
+
+}
+
+.notification-box.show{
+
+opacity:1;
+visibility:visible;
+transform:translateY(0);
+
+}
+.notification-box ul{
+
+padding-left:20px;
+
+}
+
+.notification-box li{
+
+margin:10px 0;
+
+}
+body.dark-mode .notification-box{
+
+background:#222;
+
+color:white;
+
+}
+/* ==========================
+MENU BUTTON
+========================== */
+
+.menu-btn{
+
+display:none;
+
+font-size:28px;
+
+background:none;
+
+border:none;
+
+cursor:pointer;
+
+margin-right:15px;
+
+}
+/* ==========================
+RESPONSIVE SIDEBAR
+========================== */
+
+@media(max-width:768px){
+
+.menu-btn{
+
+display:block;
+
+}
+
+.sidebar{
+
+position:fixed;
+
+left:-260px;
+
+top:0;
+
+width:250px;
+
+height:100%;
+
+transition:.4s;
+
+z-index:1000;
+
+}
+
+.sidebar.active{
+
+left:0;
+
+}
+
+.main-content{
+
+width:100%;
+
+margin-left:0;
+
+}
+
+}
+/* ===========================
+ACCESSIBILITY
+=========================== */
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus{
+
+outline:3px solid #2563eb;
+
+}
+/* ==========================
+PROFILE DROPDOWN
+========================== */
+
+.profile{
+
+position:relative;
+
+cursor:pointer;
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+.profile img{
+
+width:45px;
+
+height:45px;
+
+border-radius:50%;
+
+}
+
+.profile-dropdown{
+
+position:absolute;
+
+top:70px;
+
+right:0;
+
+background:white;
+
+width:220px;
+
+border-radius:10px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+display:none;
+
+overflow:hidden;
+
+z-index:999;
+
+}
+
+.profile-dropdown a{
+
+display:block;
+
+padding:15px;
+
+text-decoration:none;
+
+color:#333;
+
+transition:.3s;
+
+}
+
+.profile-dropdown a:hover{
+
+background:#2563eb;
+
+color:white;
+
+}
+body.dark-mode .profile-dropdown{
+
+background:#1f2937;
+
+}
+
+body.dark-mode .profile-dropdown a{
+
+color:white;
+
+}
+.showProfile{
+
+display:block;
+
+}
+/* ==========================
+LIVE DATE TIME
+========================== */
+
+.date-time{
+
+text-align:center;
+
+margin-right:20px;
+
+}
+
+.date-time h3{
+
+font-size:18px;
+ color:#222;
+margin:0;
+
+}
+
+.date-time p{
+
+font-size:13px;
+
+margin:0;
+
+color:gray;
+
+}
+
+body.dark-mode .date-time p{
+
+color:#ccc;
+
+}
+/* ==========================
+CHART
+========================== */
+
+.chart-section{
+
+background:white;
+
+padding:25px;
+
+margin-top:30px;
+
+border-radius:12px;
+
+}
+
+body.dark-mode .chart-section{
+
+background:#1f2937;
+
+}
+.topbar h1{
+    color:#ffffff;
+}
+.date-time h3{
+
+font-size:18px;
+color:#ffffff;
+margin:0;
+
+}
+
+.date-time p{
+
+font-size:13px;
+margin:0;
+color:#d1d5db;
+
+}
+.notification i{
+    color:white;
+}
+.profile h3,
+.profile p{
+    color:white;
+}
+body.dark-mode .progress-card h2,
+body.dark-mode .progress-card p,
+body.dark-mode .activity-card h2,
+body.dark-mode .activity-card li{
+    color:white;
 }

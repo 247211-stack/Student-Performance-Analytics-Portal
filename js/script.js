@@ -478,3 +478,230 @@ cards.forEach(function (card) {
 ===================================== */
 
 console.log("Week 3 Script Loaded Successfully");
+/* ==========================
+   DARK MODE
+========================== */
+
+const themeBtn = document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    if(themeBtn){
+        themeBtn.innerHTML="☀️ Light Mode";
+    }
+
+}
+
+if(themeBtn){
+
+    themeBtn.addEventListener("click",function(){
+
+        document.body.classList.toggle("dark-mode");
+
+        if(document.body.classList.contains("dark-mode")){
+
+            localStorage.setItem("theme","dark");
+
+            this.innerHTML="☀️ Light Mode";
+
+        }
+
+        else{
+
+            localStorage.setItem("theme","light");
+
+            this.innerHTML="🌙 Dark Mode";
+
+        }
+
+    });
+
+}
+/* ==========================
+   ROLE BASED SIDEBAR
+========================== */
+
+const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (loggedInUser) {
+
+    const roleText = document.getElementById("userRole");
+
+    if (roleText) {
+        roleText.textContent = loggedInUser.role;
+    }
+
+    const menu = document.getElementById("sidebarMenu");
+
+    if (menu) {
+
+        if (loggedInUser.role === "Administrator") {
+
+            menu.innerHTML = `
+                <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fa-solid fa-users"></i> Manage Users</a></li>
+                <li><a href="report.html"><i class="fa-solid fa-file-lines"></i> Reports</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            `;
+
+        }
+
+        else if (loggedInUser.role === "Teacher") {
+
+            menu.innerHTML = `
+                <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fa-solid fa-book"></i> Courses</a></li>
+                <li><a href="#"><i class="fa-solid fa-user-graduate"></i> Students</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            `;
+
+        }
+
+        else {
+
+            menu.innerHTML = `
+                <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fa-solid fa-book-open"></i> My Courses</a></li>
+                <li><a href="report.html"><i class="fa-solid fa-chart-line"></i> Results</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            `;
+
+        }
+
+    }
+
+}
+/* ==========================
+NOTIFICATION PANEL
+========================== */
+
+const bell=document.getElementById("bellIcon");
+
+const box=document.getElementById("notificationBox");
+
+if(bell){
+bell.addEventListener("click",function(){
+
+box.classList.toggle("show");
+
+});
+
+
+}
+/* ==========================
+SIDEBAR TOGGLE
+========================== */
+
+const menuToggle = document.getElementById("menuToggle");
+
+const sidebar = document.querySelector(".sidebar");
+
+if(menuToggle){
+
+menuToggle.addEventListener("click",function(){
+
+sidebar.classList.toggle("active");
+
+});
+
+}
+/* ==========================
+PROFILE DROPDOWN
+========================== */
+
+const profileMenu=document.getElementById("profileMenu");
+
+const profileDropdown=document.getElementById("profileDropdown");
+
+if(profileMenu){
+
+profileMenu.addEventListener("click",function(){
+
+profileDropdown.classList.toggle("showProfile");
+
+});
+
+}
+/* ==========================
+LIVE DATE & TIME
+========================== */
+
+function updateClock(){
+
+const now=new Date();
+
+const time=now.toLocaleTimeString();
+
+const date=now.toDateString();
+
+const liveTime=document.getElementById("liveTime");
+
+const liveDate=document.getElementById("liveDate");
+
+if(liveTime){
+
+liveTime.innerHTML=time;
+
+}
+
+if(liveDate){
+
+liveDate.innerHTML=date;
+
+}
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+/* ==========================
+PERFORMANCE CHART
+========================== */
+
+const chartCanvas=document.getElementById("performanceChart");
+
+if(chartCanvas){
+
+new Chart(chartCanvas,{
+
+type:"bar",
+
+data:{
+
+labels:["Programming","Database","Web","AI","SE"],
+
+datasets:[{
+
+label:"Marks",
+
+data:[95,88,97,91,85]
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+display:true
+
+}
+
+}
+
+}
+
+});
+
+}

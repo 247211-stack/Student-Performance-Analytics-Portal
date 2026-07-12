@@ -39,7 +39,8 @@ if (registerForm) {
         const email = document.getElementById("regEmail").value.trim();
         const password = document.getElementById("regPassword").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
-
+        const role = document.getElementById("role").value;
+        
         const message = document.getElementById("registerMessage");
 
         if (password !== confirmPassword) {
@@ -61,14 +62,15 @@ if (registerForm) {
             return;
 
         }
-
+        
         users.push({
 
-            name: name,
-            email: email,
-            password: password
+    name: name,
+    email: email,
+    password: password,
+    role: role
 
-        });
+});
 
         localStorage.setItem("users", JSON.stringify(users));
 

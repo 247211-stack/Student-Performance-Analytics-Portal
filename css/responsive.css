@@ -348,3 +348,67 @@ font-size:36px;
 .sidebar ul li a:hover{
     color:#fff;
 }
+/* ===================================
+   MOBILE RESPONSIVE
+=================================== */
+
+@media (max-width:768px){
+
+.dashboard-cards{
+
+display:grid;
+grid-template-columns:1fr;
+gap:20px;
+
+}
+
+.action-container{
+
+display:grid;
+grid-template-columns:1fr;
+gap:20px;
+
+}
+
+.performance-section{
+
+display:flex;
+flex-direction:column;
+gap:20px;
+
+}
+
+.students table{
+
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+
+}
+
+.student-profile{
+
+padding:15px;
+
+}
+
+.profile-card{
+
+width:100%;
+
+}
+
+.topbar{
+
+flex-wrap:wrap;
+gap:15px;
+
+}
+
+.profile{
+
+margin-top:10px;
+
+}
+
+}
