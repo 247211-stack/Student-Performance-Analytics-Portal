@@ -80,52 +80,146 @@ if (localStorage.getItem("students")) {
 
     students = [
 
-        {
-            id: "101",
-            name: "Ali Khan",
-            department: "BSCS",
-            semester: "4",
-            gpa: "3.82",
-            status: "Excellent"
-        },
+    
 
-        {
-            id: "102",
-            name: "Ayesha Noor",
-            department: "BSIT",
-            semester: "3",
-            gpa: "3.56",
-            status: "Good"
-        },
+{
+id:"101",
+name:"Ali Khan",
+department:"BSCS",
+semester:"4",
+gpa:"3.82",
+status:"Excellent"
+},
 
-        {
-            id: "103",
-            name: "Hamza Ali",
-            department: "BSSE",
-            semester: "5",
-            gpa: "3.91",
-            status: "Excellent"
-        },
+{
+id:"102",
+name:"Ayesha Noor",
+department:"BSIT",
+semester:"3",
+gpa:"3.56",
+status:"Good"
+},
 
-        {
-            id: "104",
-            name: "Fatima Ahmed",
-            department: "BSAI",
-            semester: "2",
-            gpa: "3.74",
-            status: "Very Good"
-        },
+{
+id:"103",
+name:"Hamza Ali",
+department:"BSSE",
+semester:"5",
+gpa:"3.91",
+status:"Excellent"
+},
 
-        {
-            id: "105",
-            name: "Usman Tariq",
-            department: "BSCS",
-            semester: "6",
-            gpa: "3.96",
-            status: "Outstanding"
-        }
+{
+id:"104",
+name:"Fatima Ahmed",
+department:"BSAI",
+semester:"2",
+gpa:"3.74",
+status:"Very Good"
+},
 
-    ];
+{
+id:"105",
+name:"Usman Tariq",
+department:"BSCS",
+semester:"6",
+gpa:"3.96",
+status:"Outstanding"
+},
+
+{
+id:"106",
+name:"Bilal Ahmed",
+department:"BSIT",
+semester:"4",
+gpa:"3.43",
+status:"Good"
+},
+
+{
+id:"107",
+name:"Sara Khan",
+department:"BSSE",
+semester:"6",
+gpa:"3.88",
+status:"Excellent"
+},
+
+{
+id:"108",
+name:"Zain Ali",
+department:"BSAI",
+semester:"5",
+gpa:"3.61",
+status:"Very Good"
+},
+
+{
+id:"109",
+name:"Hina Noor",
+department:"BSCS",
+semester:"2",
+gpa:"3.27",
+status:"Good"
+},
+
+{
+id:"110",
+name:"Ahmed Raza",
+department:"BSIT",
+semester:"7",
+gpa:"3.99",
+status:"Outstanding"
+},
+
+{
+id:"111",
+name:"Areeba Fatima",
+department:"BSCS",
+semester:"1",
+gpa:"3.31",
+status:"Good"
+},
+
+{
+id:"112",
+name:"Talha Aslam",
+department:"BSSE",
+semester:"8",
+gpa:"3.79",
+status:"Excellent"
+},
+
+{
+id:"113",
+name:"Maham Yousaf",
+department:"BSAI",
+semester:"4",
+gpa:"3.58",
+status:"Very Good"
+},
+
+{
+id:"114",
+name:"Abdullah Khan",
+department:"BSCS",
+semester:"5",
+gpa:"3.92",
+status:"Outstanding"
+},
+
+{
+id:"115",
+name:"Iqra Javed",
+department:"BSIT",
+semester:"3",
+gpa:"3.47",
+status:"Good"
+}
+
+];
+
+    
 
     localStorage.setItem("students", JSON.stringify(students));
 
@@ -141,6 +235,9 @@ const studentForm = document.getElementById("studentForm");
 const studentTable = document.querySelector("#studentTable tbody");
 
 const searchInput = document.getElementById("searchInput");
+const departmentFilter = document.getElementById("departmentFilter");
+const semesterFilter = document.getElementById("semesterFilter");
+const statusFilter = document.getElementById("statusFilter");
 
 const totalStudents = document.getElementById("totalStudents");
 
@@ -153,14 +250,22 @@ const attendance = document.getElementById("attendance");
 /* ==========================
    SHOW STUDENTS
 ========================== */
+let currentPage = 1;
 
+const rowsPerPage = 5;
 function displayStudents() {
 
     if (!studentTable) return;
 
     studentTable.innerHTML = "";
 
-    students.forEach(student => {
+    const start = (currentPage - 1) * rowsPerPage;
+
+     const end = start + rowsPerPage;
+
+const pageStudents = students.slice(start, end);
+
+pageStudents.forEach(student => {
 
         studentTable.innerHTML += `
 
@@ -197,6 +302,15 @@ function displayStudents() {
     });
 
     updateDashboardCards();
+    const pageInfo = document.getElementById("pageInfo");
+
+if(pageInfo){
+
+    const totalPages = Math.ceil(students.length / rowsPerPage);
+
+    pageInfo.innerHTML = `Page ${currentPage} of ${totalPages}`;
+
+}
 
 }
 
@@ -210,30 +324,92 @@ if (studentForm) {
     studentForm.addEventListener("submit", function (e) {
 
         e.preventDefault();
+        
+        const formMessage = document.getElementById("formMessage");
 
-        const student = {
+const id=document.getElementById("studentID").value.trim();
 
-            id: document.getElementById("studentID").value.trim(),
+const name=document.getElementById("studentName").value.trim();
 
-            name: document.getElementById("studentName").value.trim(),
+const department=document.getElementById("department").value.trim();
 
-            department: document.getElementById("department").value.trim(),
+const semester=document.getElementById("semester").value.trim();
 
-            semester: document.getElementById("semester").value.trim(),
+const gpa=document.getElementById("gpa").value.trim();
 
-            gpa: document.getElementById("gpa").value.trim(),
+const status=document.getElementById("status").value.trim();
+const student = {
 
-            status: document.getElementById("status").value.trim()
+id,
 
-        };
+name,
+
+department,
+
+semester,
+
+gpa,
+
+status
+
+};
+if(id==="" || name==="" || department==="" || semester==="" || gpa==="" || status===""){
+
+formMessage.className="error-message";
+
+formMessage.innerHTML="Please fill all fields.";
+
+return;
+
+}
+
+if(isNaN(gpa) || gpa<0 || gpa>4){
+
+formMessage.className="error-message";
+
+formMessage.innerHTML="GPA must be between 0 and 4.";
+
+return;
+
+}
+
+if(semester<1 || semester>8){
+
+formMessage.className="error-message";
+
+formMessage.innerHTML="Semester must be between 1 and 8.";
+
+return;
+
+}
+
+if(students.some(s=>s.id===id)){
+
+formMessage.className="error-message";
+
+formMessage.innerHTML="Student ID already exists.";
+
+return;
+
+} 
 
         students.push(student);
 
         localStorage.setItem("students", JSON.stringify(students));
 
         displayStudents();
+        loadCharts();
 
         studentForm.reset();
+        formMessage.className="success-message";
+
+formMessage.innerHTML="Student added successfully.";
+
+setTimeout(function(){
+
+formMessage.style.display="none";
+
+},3000);
 
     });
 
@@ -251,6 +427,7 @@ function deleteStudent(id) {
     localStorage.setItem("students", JSON.stringify(students));
 
     displayStudents();
+    loadCharts();
 
 }
 
@@ -291,32 +468,60 @@ displayStudents();
    ADVANCED SEARCH
 ========================== */
 
-if (searchInput) {
+function filterStudents(){
 
-    searchInput.addEventListener("keyup", function () {
+    const search = searchInput.value.toLowerCase();
 
-        const value = this.value.toLowerCase();
+    const department = departmentFilter.value;
 
-        const rows = studentTable.querySelectorAll("tr");
+    const semester = semesterFilter.value;
 
-        rows.forEach(row => {
+    const status = statusFilter.value;
 
-            if (row.innerText.toLowerCase().includes(value)) {
+    const rows = studentTable.querySelectorAll("tr");
 
-                row.style.display = "";
+    rows.forEach(row=>{
 
-            } else {
+        const id=row.cells[0].innerText.toLowerCase();
 
-                row.style.display = "none";
+        const name=row.cells[1].innerText.toLowerCase();
 
-            }
+        const dep=row.cells[2].innerText;
 
-        });
+        const sem=row.cells[3].innerText;
+
+        const stat=row.cells[5].innerText;
+
+        const matchSearch=id.includes(search) || name.includes(search);
+
+        const matchDepartment=!department || dep===department;
+
+        const matchSemester=!semester || sem===semester;
+
+        const matchStatus=!status || stat===status;
+
+        if(matchSearch && matchDepartment && matchSemester && matchStatus){
+
+            row.style.display="";
+
+        }
+
+        else{
+
+            row.style.display="none";
+
+        }
 
     });
 
 }
+searchInput.addEventListener("keyup",filterStudents);
 
+departmentFilter.addEventListener("change",filterStudents);
+
+semesterFilter.addEventListener("change",filterStudents);
+
+statusFilter.addEventListener("change",filterStudents);
 
 /* ==========================
    SORT BY NAME
@@ -337,6 +542,7 @@ if (sortName) {
         localStorage.setItem("students", JSON.stringify(students));
 
         displayStudents();
+        loadCharts();
 
     });
 
@@ -362,6 +568,7 @@ if (sortGPA) {
         localStorage.setItem("students", JSON.stringify(students));
 
         displayStudents();
+        loadCharts();
 
     });
 
@@ -663,12 +870,15 @@ updateClock();
 /* ==========================
 PERFORMANCE CHART
 ========================== */
+/* ==========================
+   CHARTS
+========================== */
 
-const chartCanvas=document.getElementById("performanceChart");
+const performanceChart=document.getElementById("performanceChart");
 
-if(chartCanvas){
+if(performanceChart){
 
-new Chart(chartCanvas,{
+new Chart(performanceChart,{
 
 type:"bar",
 
@@ -687,20 +897,178 @@ data:[95,88,97,91,85]
 },
 
 options:{
+responsive:true
+}
 
-responsive:true,
-
-plugins:{
-
-legend:{
-
-display:true
+});
 
 }
 
+const departmentChart=document.getElementById("departmentChart");
+
+if(departmentChart){
+
+new Chart(departmentChart,{
+
+type:"pie",
+
+data:{
+
+labels:["BSCS","BSIT","BSSE","BSAI"],
+
+datasets:[{
+
+data:[6,4,3,2]
+
+}]
+
+},
+
+options:{
+responsive:true
 }
 
+});
+
 }
+
+const gpaChart=document.getElementById("gpaChart");
+
+if(gpaChart){
+
+new Chart(gpaChart,{
+
+type:"line",
+
+data:{
+
+labels:["Semester 1","Semester 2","Semester 3","Semester 4","Semester 5","Semester 6","Semester 7","Semester 8"],
+
+datasets:[{
+
+label:"Average GPA",
+
+data:[3.1,3.3,3.4,3.6,3.7,3.8,3.9,4.0],
+
+fill:false,
+
+tension:0.4
+
+}]
+
+},
+
+options:{
+responsive:true
+}
+
+});
+
+}
+/*=========================
+PAGINATION
+=========================*/
+
+const prevPage = document.getElementById("prevPage");
+
+const nextPage = document.getElementById("nextPage");
+
+if(prevPage){
+
+prevPage.addEventListener("click",function(){
+
+if(currentPage>1){
+
+currentPage--;
+
+displayStudents();
+
+}
+
+});
+
+}
+
+if(nextPage){
+
+nextPage.addEventListener("click",function(){
+
+const totalPages=Math.ceil(students.length/rowsPerPage);
+
+if(currentPage<totalPages){
+
+currentPage++;
+
+displayStudents();
+
+}
+
+});
+
+}
+/* ==========================
+   EXPORT CSV
+========================== */
+
+const exportCSV = document.getElementById("exportCSV");
+
+if(exportCSV){
+
+exportCSV.addEventListener("click",function(){
+
+const csv = Papa.unparse(students);
+
+const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+
+const link = document.createElement("a");
+
+link.href = URL.createObjectURL(blob);
+
+link.download = "Students.csv";
+
+link.click();
+
+});
+
+}
+
+/* ==========================
+   EXPORT PDF
+========================== */
+
+const exportPDF = document.getElementById("exportPDF");
+
+if(exportPDF){
+
+exportPDF.addEventListener("click",function(){
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
+doc.setFontSize(18);
+
+doc.text("Student Performance Report",20,20);
+
+let y = 35;
+
+students.forEach(student=>{
+
+doc.text(
+
+`${student.id} | ${student.name} | ${student.department} | GPA: ${student.gpa}`,
+
+20,
+
+y
+
+);
+
+y += 10;
+
+});
+
+doc.save("Students_Report.pdf");
 
 });
 

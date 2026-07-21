@@ -212,6 +212,70 @@ id="searchInput"
 placeholder="🔍 Search by ID or Name"
 aria-label="Search Students">
 
+<div class="filter-container">
+
+<select id="departmentFilter">
+
+<option value="">All Departments</option>
+
+<option value="BSCS">BSCS</option>
+
+<option value="BSIT">BSIT</option>
+
+<option value="BSSE">BSSE</option>
+
+<option value="BSAI">BSAI</option>
+
+</select>
+
+<select id="statusFilter">
+
+<option value="">All Status</option>
+
+<option value="Outstanding">Outstanding</option>
+
+<option value="Excellent">Excellent</option>
+
+<option value="Very Good">Very Good</option>
+
+<option value="Good">Good</option>
+
+</select>
+
+<select id="semesterFilter">
+
+<option value="">All Semesters</option>
+
+<option value="1">Semester 1</option>
+
+<option value="2">Semester 2</option>
+
+<option value="3">Semester 3</option>
+
+<option value="4">Semester 4</option>
+
+<option value="5">Semester 5</option>
+
+<option value="6">Semester 6</option>
+
+</select>
+
+<select id="statusFilter">
+
+<option value="">All Status</option>
+
+<option>Outstanding</option>
+
+<option>Excellent</option>
+
+<option>Very Good</option>
+
+<option>Good</option>
+
+</select>
+
+</div>
+
 <br><br>
 
 <div class="sort-buttons">
@@ -237,6 +301,17 @@ id="resetData"
 class="btn">
 
 Reset
+
+</button>
+<button id="exportPDF" class="btn">
+
+Export PDF
+
+</button>
+
+<button id="exportCSV" class="btn">
+
+Export CSV
 
 </button>
 
@@ -403,15 +478,40 @@ Delete
 </tbody>
 
 </table>
+<div class="pagination">
 
-</section>
+    <button id="prevPage" class="btn">⬅ Previous</button>
+
+    <span id="pageInfo">Page 1</span>
+
+    <button id="nextPage" class="btn">Next ➡</button>
+
+</div>
 <section class="chart-section">
 
-<h2>Student Performance Overview</h2>
+<h2>Student Performance Dashboard</h2>
 
+<div class="chart-grid">
+
+<div class="chart-card">
+<h3>Performance Overview</h3>
 <canvas id="performanceChart"></canvas>
+</div>
+
+<div class="chart-card">
+<h3>Department Distribution</h3>
+<canvas id="departmentChart"></canvas>
+</div>
+
+<div class="chart-card full-width">
+<h3>Semester GPA Trend</h3>
+<canvas id="gpaChart"></canvas>
+</div>
+
+</div>
 
 </section>
+
 
 <section class="performance-section">
 
@@ -499,7 +599,7 @@ Delete
 <h2>Add New Student</h2>
 
 <form id="studentForm">
-
+<div id="formMessage"></div>
 <input
 type="text"
 id="studentID"
@@ -600,6 +700,9 @@ Add Student
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/auth.js"></script>
 
